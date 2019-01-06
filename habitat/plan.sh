@@ -6,8 +6,8 @@ pkg_license=("Apache-2.0")
 pkg_deps=(core/jre8)
 pkg_build_deps=(core/jdk8/8u131 core/maven)
 pkg_svc_user="hab"
-pkg_svc_run="java -jar ${HAB_CACHE_SRC_PATH}/${pkg_name}-${pkg_version}/target/${pkg_name}.jar"
-#pkg_bin_dirs=(bin)
+#pkg_svc_run="java -jar $(hab pkg path exofaaste/demo)/${pkg_name}.jar"
+pkg_bin_dirs=(bin)
 
 
 #Prepare before build
@@ -25,6 +25,15 @@ do_build()
 
 do_install()
 {
- cp ${HAB_CACHE_SRC_PATH}/${pkg_dirname}/target/${pkg_name}.jar $pkg_prefix/   
- return 0
+	echo "This is the prefix ${pkg_svc_path}"
+	export JAR_HOME=${PREFIX}
+#	mkdir /artifact
+	cp ${HAB_CACHE_SRC_PATH}/${pkg_dirname}/target/${pkg_name}.jar ${PREFIX}/   
+	#return 0
 }
+
+#do_build_service(){
+#
+#	echo "Starting Java Service At ${PREFIX}"
+#	exec java -jar ${pkg_prefix}/${pkg_name}.jar &
+#}

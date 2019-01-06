@@ -1,0 +1,6 @@
+#!/bin/bash
+exec 2>&1
+echo "Starting Java Service at $(hab pkg path exofaaste/demo)"
+export JAR_HOME=$(hab pkg path exofaaste/demo)
+exec java -jar ${JAR_HOME}/demo.jar
+
